@@ -1,0 +1,28 @@
+name: Tests
+
+on:
+  push
+
+jobs:
+  job:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+      - name: Install dependencies
+        run: |
+          pip install numpy
+          npm install -q pyright
+      - name: Static type check
+        run: pyright repro.py
