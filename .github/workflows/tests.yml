@@ -5,25 +5,27 @@ on:
 
 jobs:
   job:
-    name: Test (Pyright ${{ matrix.pyright-version }})
+    name: Test (Python ${{ matrix.python-ver }}, NumPy ${{ matrix.numpy-ver }}, Pyright ${{ matrix.pyright-ver }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        pyright-version: [1.1.120, 1.1.121, 1.1.122, 1.1.123, 1.1.124, 1.1.125, 1.1.126, 1.1.127]
+        python-ver: [3.7, 3.8, 3.9]
+        numpy-ver: [1.20.0, 1.20.1, 1.20.2]
+        pyright-ver: [1.1.120, 1.1.121, 1.1.122, 1.1.123, 1.1.124, 1.1.125, 1.1.126, 1.1.127]
     steps:
       - uses: actions/checkout@v2
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: ${{ matrix.python-ver }}
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 15
       - name: Install dependencies
         run: |
-          pip install numpy==1.20.2
-          npm install -g pyright@${{ matrix.pyright-version }}
+          pip install numpy==${{ matrix.numpy-ver }}
+          npm install -g pyright@${{ matrix.pyright-ver }}
       - name: Static type check
         run: pyright repro.py
