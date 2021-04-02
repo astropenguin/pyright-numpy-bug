@@ -5,11 +5,12 @@ on:
 
 jobs:
   job:
-    name: Test (Python ${{ matrix.python-version }})
+    name: Test (Python ${{ matrix.python-version }}, NumPy v${{ matrix.numpy-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.7, 3.8, 3.9]
+        numpy-version: [1.20.0, 1.20.1, 1.20.2]
     steps:
       - uses: actions/checkout@v2
       - name: Setup Python ${{ matrix.python-version }}
@@ -22,7 +23,7 @@ jobs:
           node-version: 15
       - name: Install dependencies
         run: |
-          pip install numpy
+          pip install numpy==${{ matrix.numpy-version }}
           npm install -g pyright
       - name: Static type check
         run: pyright repro.py
