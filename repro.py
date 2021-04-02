@@ -1,6 +1,6 @@
-import numpy as np
+import numpy
 from numpy import array
 
 
 a = array(0)  # ok
-b = np.array(0)  # type of "array" is partially unknown
+b = numpy.array(0)  # type of "array" is partially unknown
