@@ -1,6 +1,6 @@
 import numpy as np
-from numpy import ones
+from numpy import array
 
-shape = 2, 2
-a = np.ones(shape)
-b = ones(shape)
+
+a = array(0)  # ok
+b = np.array(0)  # type of "array" is partially unknown
