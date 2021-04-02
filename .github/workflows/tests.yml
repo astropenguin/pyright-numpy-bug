@@ -23,6 +23,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install numpy
-          npm install -q pyright
+          npm install -g pyright
       - name: Static type check
         run: pyright repro.py
