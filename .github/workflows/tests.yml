@@ -5,7 +5,7 @@ on:
 
 jobs:
   job:
-    name: Test (Pyright ${{ matrix.pyright-ver }})
+    name: Test (Pyright ${{ matrix.pyright-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
